@@ -1,0 +1,16 @@
+{
+  "name": "safety_report_app",
+  "version": "1.0.0",
+  "description": "Safety Report for Trucks",
+  "dependencies": {
+    "cfenv": "^1.0.3",
+    "cloudant": "^1.6.2",
+    "express": "^4.14.0",
+    "request": "^2.78.0"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Stephen Chen",
+  "license": "ISC"
+}

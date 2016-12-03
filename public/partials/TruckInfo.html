@@ -1,0 +1,17 @@
+ <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Truck Information</title>
+  </head>
+  <body>
+  	<form data-ng-submit="submit()" data-ng-controller="TruckReportCtrl">
+  		Enter Truck Vin Number:
+  		<input type="text" ng-model="vin" name="vin" />
+  		<input type="submit" id="submit" value="Submit" />
+  		<button ng-click="question()">Start Inspection</button>
+  		<div>Vin: {{truck_report.vin}}</div>
+  		<div>date: {{truck_report.date}}</div>
+  	</form>
+  </body>
+</html>

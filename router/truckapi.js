@@ -8,7 +8,6 @@ var dbname = 'truck_report';
 
 router.get('/info', function(req,res,next) {
 	db = cloudant.use(dbname);
-	console.log(req.query.vin);
 	var cloudantquery = {
 		"selector": {
 			"vin": {"$eq": req.query.vin}

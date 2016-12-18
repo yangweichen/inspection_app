@@ -35,9 +35,14 @@ var getUser = function(e,res) {
 	}, function (error,response,body) {
 		if (error) res.send({"error":error});
 		console.log(body.docs[0]);
-		if (body.docs.length > 1) res.send({"error":"DUPLICATE_USER"});
-		if (body.docs.length == 0) res.send({"error":"NO_USER_DOC_FOUND"});
+		if (body.docs.length > 1) {
+			res.send({"error":"DUPLICATE_USER"});
+		}
+		if (body.docs.length == 0) {
+			res.send({"error":"NO_USER_DOC_FOUND"});
+		}
 
+		res.status(200)
 		res.send(body.docs[0]);
 	});
 }
@@ -61,14 +66,22 @@ router.post('/login', function(req,res,next) {
 		json: true,
 		body: cloudantquery
 	}, function (error,response,body) {
+		// default to 401
+		res.status(401);
 		if (error) res.send({"error":error});
 
 		var users = body.docs[0].employees;
 		var indexOf = users.indexOf(req.body.email);
 
-		if (users == null) res.send({"error":"USER_OBJECT_UNDEFINED"});
-		if (users.length == 0) res.send({"error":"EMPTY_USER_LIST"});
-		if (indexOf < 0) res.send({"error":"NO_USER_FOUND"});
+		if (users == null) {
+			res.send({"error":"USER_OBJECT_UNDEFINED"});
+		}
+		if (users.length == 0) {
+			res.send({"error":"EMPTY_USER_LIST"});
+		}
+		if (indexOf < 0) {
+			res.send({"error":"NO_USER_FOUND"});
+		}
 		else {
 			var userInfo = getUser(users[indexOf],res);
 		}

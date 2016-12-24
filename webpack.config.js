@@ -14,7 +14,6 @@ const PATHS = {
   build: path.join(__dirname, 'app/build'),
   // favicon: path.join(__dirname, 'app/src/favicon.ico'),
   stylesheets: path.join(__dirname, 'app/src/stylesheets', 'style.scss'),
-  // images: path.join(__dirname, 'app/src/images'),
   // logo: path.join(__dirname, 'app/src/images/logo.png'),
   html_template: path.join(__dirname, 'app/src/index.html')
 };
@@ -42,7 +41,6 @@ const common = {
   entry: {
     app: PATHS.app,
     style: PATHS.stylesheets
-    // images: PATHS.images
   },
   output: {
     path: PATHS.build,

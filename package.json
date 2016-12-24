@@ -4,12 +4,12 @@
   "description": "Safety inspection logging and reporting",
   "license": "ISC",
   "private": false,
-  "main": "server.js",
+  "main": "server/server.js",
   "engines": {
     "node": "6.9.x"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "node server/server.js",
     "hmr": "webpack-dev-server",
     "build": "webpack",
     "build-watch": "webpack -w --progress --colors"
@@ -27,6 +27,7 @@
   ],
   "dependencies": {
     "axios": "^0.15.3",
+    "body-parser": "^1.15.2",
     "cfenv": "^1.0.3",
     "cloudant": "^1.6.2",
     "express": "^4.14.0",

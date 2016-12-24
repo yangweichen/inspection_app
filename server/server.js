@@ -46,5 +46,5 @@ var cfenv = require('cfenv');
 var appEnv = cfenv.getAppEnv();
 
 app.listen(appEnv.port, function(){
-	console.log('Satey Report App started ready at ', appEnv.url);
+	console.log('Safety Report App started ready at ', appEnv.url);
 });

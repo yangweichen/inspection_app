@@ -18,7 +18,7 @@
 	}		
 */
 var express = require('express');
-var cloudant = require('../database/db_credential');
+var cloudant = require('../../database/db_credential');
 var request = require('request');
 
 var db = null;

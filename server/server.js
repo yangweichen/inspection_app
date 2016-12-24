@@ -41,7 +41,10 @@ require('./config/error_handler')(app);
 // 	res.json(trucks);
 // });
 
-//access cloud foundry env
+// User assigned port or default to 8080
+process.env.PORT = process.env.PORT || 8080;
+
+// Access cloud foundry env vars
 var cfenv = require('cfenv');
 var appEnv = cfenv.getAppEnv();
 

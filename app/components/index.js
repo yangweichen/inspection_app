@@ -7,6 +7,12 @@ import { Router, browserHistory, Route, IndexRoute } from 'react-router';
 import store from '../redux/store';
 import { Provider } from 'react-redux';
 
+// Material Theme
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import { muiTheme } from './mui-theme';
+injectTapEventPlugin();
+
 // React containers and components
 import Home from './Home'
 import App from './App';
@@ -20,10 +26,12 @@ const appEnter = (nextState) => {
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={browserHistory}>
-      <Route path="/" component={ Home } onEnter={ appEnter } />
-      <Route component={App} onEnter={ appEnter } />
-    </Router>
+    <MuiThemeProvider muiTheme={muiTheme}>
+      <Router history={browserHistory}>
+        <Route path="/" component={ Home } onEnter={ appEnter } />
+        <Route component={App} onEnter={ appEnter } />
+      </Router>
+    </MuiThemeProvider>
   </Provider>,
   document.getElementById('app')
 );

@@ -30,6 +30,7 @@
     font-size: 68px;
     font-weight: 300;
     letter-spacing: 5px;
+    margin-bottom: 10px;
     @media (max-width: $screen-md) {
       font-size: 52px;
     }
@@ -38,7 +39,13 @@
     }
   }
   > .login { // login form
-    background: black;
-    opacity: .5;
+    width: 100%;
+    max-width: 550px;
+    padding: 0 50px;
+    > form {
+      padding: 20px;
+      //opacity: .5;
+      background: black;
+    }
   }
 }

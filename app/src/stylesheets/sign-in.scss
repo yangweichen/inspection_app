@@ -1,4 +1,4 @@
-#home {
+#sign-in {
   position: relative;
   align-items: center;
   width: 100%;
@@ -6,7 +6,7 @@
   background: black;
 }
 
-.home-wallpaper {
+.sign-in-wallpaper {
   position: absolute;
   top: 0;
   left: 0;
@@ -20,7 +20,7 @@
   background-size: cover;
 }
 
-.home-content {
+.sign-in-content {
   position: relative;
   display: flex;
   flex-direction: column;

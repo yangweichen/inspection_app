@@ -4,10 +4,10 @@ var request = require('request');
 var bodyParser = require("body-parser");
 
 var router = express.Router();
-var dbname = 'truck_company';
+var dbname = 'inspection_dev';
 var db = cloudant.use(dbname);
 // manually set company id
-var companyId = "feda10d40d9e3a6da078fe22ce99392a";
+var companyId = "fceb984cc410626b316b7e1fdb7dcc1d";
 
 var getUser = function(e,res) {
 	console.log("Enter getUser");
@@ -36,14 +36,16 @@ var getUser = function(e,res) {
 		if (error) res.send({"error":error});
 		console.log(body.docs[0]);
 		if (body.docs.length > 1) {
+			res.status(401);
 			res.send({"error":"DUPLICATE_USER"});
-		}
-		if (body.docs.length == 0) {
+			res.next
+		} else if (body.docs.length == 0) {
+			res.status(401);
 			res.send({"error":"NO_USER_DOC_FOUND"});
+		} else {
+			res.status(200);
+			res.send(body.docs[0]);
 		}
-
-		res.status(200)
-		res.send(body.docs[0]);
 	});
 }
 

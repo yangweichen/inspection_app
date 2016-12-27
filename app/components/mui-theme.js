@@ -19,7 +19,7 @@ export const muiTheme = getMuiTheme({}, {
   fontFamily: 'Nunito',
   palette,
   appBar: {
-    color: palette.primary1Color,
+    color: palette.accent1Color,
     textColor: palette.alternateTextColor
   },
   avatar: {

@@ -1,9 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import Helmet from 'react-helmet';
-
-import { TextField, RaisedButton } from 'material-ui';
 import { login } from '../redux/user';
+
+// components and style
+import { TextField, RaisedButton } from 'material-ui';
+import { palette } from './mui-theme'
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -47,29 +49,26 @@ class SignIn extends React.Component {
         <div className="sign-in-content">
           <h1>INSPECT.ION</h1>
           <div className="login">
+            <div className="login-background"></div>
             <form onSubmit={ this.handleLogin }>
               <TextField
                 type = 'email'
                 value={ this.state.email }
+                errorText={ this.state.error }
                 onChange={ evt => this.updateEmail(evt.target.value) }
                 floatingLabelText="Email"
-                floatingLabelStyle={{ color: 'white', fontWeight: '500' }}
-                inputStyle={{ color: 'white' }}
+                floatingLabelStyle={{ color: palette.alternateTextColor }}
+                floatingLabelFocusStyle={{ color: palette.alternateFocusColor }}
+                underlineStyle={{ borderBottomColor: palette.alternateTextColor }}
+                underlineFocusStyle={{ borderBottomColor: palette.alternateFocusColor }}
+                inputStyle={{ color: palette.alternateTextColor }}
                 fullWidth={true}
               />
-              { // Error displayed on unsuccessful login
-                this.state.error ?
-                  <p className="error-text">{ this.state.error }</p> : null
-              }
               <RaisedButton
                 label="Sign In"
-                labelColor="white"
                 type="submit"
-                backgroundColor="blue"
                 fullWidth={true}
                 style={{ marginTop: '15px' }}
-                disableFocusRipple={ true }
-                disableTouchRipple={ true }
               />
             </form>
           </div>

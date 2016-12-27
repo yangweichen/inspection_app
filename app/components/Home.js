@@ -22,19 +22,13 @@ const homeButton = (href, label) =>
     <Link to={ href }>
       <RaisedButton
         label={ label }
-        labelColor="white"
-        backgroundColor="blue"
-        fullWidth={ true }
-        disableFocusRipple={ true }
-        disableTouchRipple={ true }
-      />
+        fullWidth={ true } />
     </Link>
   </div>
 
 const Home = ({ isAdmin, company }) => (
   <div id="home">
     <Helmet title="Home" />
-    <p><span>Company: </span>{ company.companyName }</p>
     <div className="actions">
     {
       // Create action buttons based on admin level

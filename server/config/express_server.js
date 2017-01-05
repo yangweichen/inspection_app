@@ -3,7 +3,8 @@ var path =require('path');
 var truckapi = require('../router/truckapi');
 var questionapi = require('../router/questionapi');
 var companyapi = require('../router/companyapi');
-var authenticationapi = require('../router/authenticationapi')
+var authenticationapi = require('../router/authenticationapi');
+// var helperapi = require('../router/helperapi');
 
 var PATHS = {
   indexHTML: path.join(__dirname, '../../app/build/index.html'),
@@ -19,6 +20,7 @@ module.exports = function (app) {
 	app.use('/api/truck', truckapi);
 	app.use('/api/question', questionapi);
 	app.use('/api/auth', authenticationapi);
+	// app.use('/api/helper', helperapi);
 
 	// Serve all front end requests
 	app.get('/', function(req, res) {

@@ -1,0 +1,16 @@
+#context-box {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.context-item {
+  margin: 0;
+  + .context-item { // adjacent item siblings
+    margin-top: 5px;
+  }
+  > span { // item headers
+    font-weight: 600;
+  }
+}

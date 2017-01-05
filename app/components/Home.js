@@ -1,34 +1,50 @@
 import React from 'react';
 import Helmet from 'react-helmet';
+import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
-import { TextField, RaisedButton } from 'material-ui';
+import { RaisedButton } from 'material-ui';
 
-export default () => (
+// All admin and basic user actions
+const adminActions = [
+  { href: '#all', label: 'View All Reports' }
+];
+const basicActions = [
+  { href: '#truck', label: 'View Truck Reports' },
+  { href: '#new', label: 'New Report' }
+];
+const getActions = isAdmin =>
+  [ ...(isAdmin ? adminActions : []), ...basicActions ];
+
+// Creates a button with the input label and link
+const homeButton = (href, label) =>
+  <div key={ href } className='action-button'>
+    <Link to={ href }>
+      <RaisedButton
+        label={ label }
+        fullWidth={ true } />
+    </Link>
+  </div>
+
+const Home = ({ isAdmin, company }) => (
   <div id="home">
-    <Helmet defaultTitle="Inspect.ion" />
-    <div className="home-wallpaper" />
-    <div className="home-content">
-      <h1>INSPECT.ION</h1>
-      <div className="login">
-        <form>
-          <TextField
-            floatingLabelText="Email"
-            floatingLabelStyle={{ color: 'white', fontWeight: '500' }}
-            type = 'email'
-            fullWidth={true}
-          />
-          <RaisedButton
-            label="Sign In"
-            labelColor="white"
-            type="submit"
-            backgroundColor="blue"
-            fullWidth={true}
-            style={{ marginTop: '15px' }}
-            disableFocusRipple={ true }
-            disableTouchRipple={ true }
-          />
-        </form>
-      </div>
+    <Helmet title="Home" />
+    <div className="actions">
+    {
+      // Create action buttons based on admin level
+      getActions(isAdmin).map(action =>
+        homeButton(action.href, action.label)
+      )
+    }
     </div>
   </div>
-);
+)
+
+// -=-=-=-=-= CONTAINER =-=-=-=-=-=-
+
+const mapStateToProps = ({ user }) => ({
+  isAdmin: user.isAdmin,
+  company: user.company
+});
+
+export default connect(mapStateToProps)(Home);

@@ -17,6 +17,7 @@ injectTapEventPlugin();
 import SignIn from './SignIn'
 import App from './App';
 import Home from './Home'
+import VinScan from './VinScan'
 
 // Check if user is logged in and redirect them accordingly
 const appEnter = (nextState, replace) => {
@@ -37,6 +38,7 @@ ReactDOM.render(
         <Route path="/" component={ SignIn } onEnter={ appEnter } />
         <Route component={App} onEnter={ appEnter }>
           <Route path="/home" component={ Home } />
+          <Route path="/new-report" component={ VinScan } />
         </Route>
       </Router>
     </MuiThemeProvider>

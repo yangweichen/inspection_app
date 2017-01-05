@@ -36,6 +36,16 @@ export const muiTheme = getMuiTheme({}, {
     disabledColor: palette.disabledColor,
     disabledTextColor: palette.canvasColor
   },
+  floatingActionButton: {
+    buttonSize: 56,
+    miniSize: 40,
+    color: palette.primary1Color,
+    iconColor: palette.alternateTextColor,
+    secondaryColor: palette.accent1Color,
+    secondaryIconColor: palette.alternateTextColor,
+    disabledColor: palette.disabledColor,
+    disabledTextColor: palette.canvasColor
+  },
   textField: {
     textColor: palette.textColor,
     hintColor: palette.accent1Color,

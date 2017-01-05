@@ -7,8 +7,17 @@ Inspect.ion is a truck inspection report logging and analytics web application. 
 ## Running Locally
 
 ### Prerequisites
+- [Git CLI](https://git-scm.com/book/en/v2/Getting-Started-The-Command-Line) 
 - [Node.js and npm](https://nodejs.org/en/)
 - [Cloudant Account](https://cloudant.com/)
+
+### Download
+
+```sh
+git clone https://github.com/yangweichen/inspection_app.git
+```
+
+This will clone the repo to your machine and into your current directory.
 
 ### Installing dependencies
 

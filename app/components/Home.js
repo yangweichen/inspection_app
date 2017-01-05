@@ -11,7 +11,7 @@ const adminActions = [
 ];
 const basicActions = [
   { href: '#truck', label: 'View Truck Reports' },
-  { href: '#new', label: 'New Report' }
+  { href: '/new-report', label: 'New Report' }
 ];
 const getActions = isAdmin =>
   [ ...(isAdmin ? adminActions : []), ...basicActions ];

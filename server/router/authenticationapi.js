@@ -1,19 +1,17 @@
 var express = require('express');
-var cloudant = require('../../database/db_credential');
 var request = require('request');
 var bodyParser = require("body-parser");
 
 var router = express.Router();
 var dbname = 'inspection_dev';
-var db = cloudant.use(dbname);
 // manually set company id
 var companyId = "fceb984cc410626b316b7e1fdb7dcc1d";
 
-var getUser = function(e,res) {
+var getUser = function(email, callback) {
 	console.log("Enter getUser");
 	var cloudantquery = {
 		"selector": {
-		    "email": e,
+		    "email": email,
 			"documentType":"userInfo"
 		},
 		"fields": [
@@ -33,18 +31,19 @@ var getUser = function(e,res) {
 		json: true,
 		body: cloudantquery
 	}, function (error,response,body) {
-		if (error) res.send({"error":error});
+		// return error object with callback function call
+		if (error) return {"error":error};
+
 		console.log(body.docs[0]);
 		if (body.docs.length > 1) {
-			res.status(401);
-			res.send({"error":"DUPLICATE_USER"});
-			res.next
+			// multipe user found; return error
+			return callback(null,{"error":"DUPLICATE_USER"});
 		} else if (body.docs.length == 0) {
-			res.status(401);
-			res.send({"error":"NO_USER_DOC_FOUND"});
+			// no user found: return error
+			return callback(null,{"error":"NO_USER_DOC_FOUND"});
 		} else {
-			res.status(200);
-			res.send(body.docs[0]);
+			// set session id to the email return
+			return callback(body.docs[0],null);
 		}
 	});
 }
@@ -54,6 +53,16 @@ router.use(bodyParser.json());
 
 router.post('/login', function(req,res,next) {
 	console.log("Enter login");
+	console.log('================================');
+	console.log(req.session);
+	console.log('================================');
+	if (req.session.user) {
+		// if user exist, send back the old one
+		console.log("old session sent");
+		res.send(req.session.user);
+	}
+	console.log('Check ID');
+	console.log(req.session.id);
 	var cloudantquery = {
 		"selector": {
 			"_id": companyId
@@ -72,11 +81,27 @@ router.post('/login', function(req,res,next) {
 		res.status(401);
 		if (error) res.send({"error":error});
 
+		if (!req.body.email) {
+			if (req.session.id) {
+
+			}
+		}
+
+		// get employee list from db, and check whether the emaill exists
+		var indexOf = -1;
 		var users = body.docs[0].employees;
-		var indexOf = users.indexOf(req.body.email);
+
+		// check id; either in req body or session
+		if (req.body.email) {
+			indexOf = users.indexOf(req.body.email);
+		} else if (req.session.id) {
+			indexOf = users.indexOf(req.session.id);
+		} else {
+			res.send({"error":"NO_ID_INPUT"});
+		}
 
 		if (users == null) {
-			res.send({"error":"USER_OBJECT_UNDEFINED"});
+			res.send({"error":"USER_ARRAY_UNDEFINED"});
 		}
 		if (users.length == 0) {
 			res.send({"error":"EMPTY_USER_LIST"});
@@ -85,7 +110,17 @@ router.post('/login', function(req,res,next) {
 			res.send({"error":"NO_USER_FOUND"});
 		}
 		else {
-			var userInfo = getUser(users[indexOf],res);
+			var userInfo = getUser(users[indexOf], function(user,error){
+
+				// if no error, set status to 200
+				if (!user.error) {
+					//set uesr for the session
+					req.session.user = user;
+					res.status(200);
+				}
+				//send back userInfo
+				res.send(user);
+			});
 		}
 
 	});
